@@ -17,6 +17,13 @@ class MovieListBloc extends Bloc<MovieListEvent, MovieListState> {
       emit(MovieListBlocLoadeding());
       try {
         MovieListModel = await MovieListApi.MovieListEvent();
+        print('***********************************');
+        emit(ModelListBlocLoaded());
+        print('************Loaded***********');
+      }
+      catch(e) {
+        print(e);
+        emit(ModelListBlocError());
       }
       // TODO: implement event handler
     });
