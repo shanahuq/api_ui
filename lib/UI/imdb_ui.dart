@@ -13,7 +13,7 @@ class _ImdbUiState extends State<ImdbUi> {
     {
       'image':
           'https://m.media-amazon.com/images/M/MV5BM2NmOTcyODYtN2YwMC00ZGEwLTkxZmQtMzBiZjc0YWE3N2ZkXkEyXkFqcGc@.jpg',
-      'category': 'movie : ',
+      'category': 'Title : ',
       'name': 'The Rivals of Amziah King',
       'type': ' Type : movie',
       'description':
@@ -22,7 +22,7 @@ class _ImdbUiState extends State<ImdbUi> {
     {
       'image':
           'https://m.media-amazon.com/images/M/MV5BZTIzNmQzYzUtNTdlNi00NmY5LThmNTYtMGFmZjUxMTgzOGNmXkEyXkFqcGc@.jpg',
-      'category': 'movie : ',
+      'category': 'Title : ',
       'name': 'The Lost Bus',
       'type': ' Type : movie',
       'description':
@@ -31,7 +31,7 @@ class _ImdbUiState extends State<ImdbUi> {
     {
       'image':
           'https://m.media-amazon.com/images/M/MV5BNzM4ZWEyZmUtNjg1YS00MDllLTk0MTUtNWU4ZGY0NjNiMmZkXkEyXkFqcGc@.jpg',
-      'category': 'movie :',
+      'category': 'Title :',
       'name': 'Superhuman Body: World of Medical Marvels',
       'type': ' Type : movie',
       'description':
@@ -40,7 +40,7 @@ class _ImdbUiState extends State<ImdbUi> {
     {
       'image':
           'https://m.media-amazon.com/images/M/MV5BOWQyNDA5NzYtODFlMi00MmQwLTlmYTMtYjI4NmYwYWNmMjYwXkEyXkFqcGc@.jpg',
-      'category': 'movie : ',
+      'category': 'Title : ',
       'name': 'The Oscars',
       'type': ' Type : movie',
       'description':
@@ -119,14 +119,15 @@ class _ImdbUiState extends State<ImdbUi> {
                     crossAxisCount: 2,
                     crossAxisSpacing: 20,
                     mainAxisSpacing: 20,
-                     childAspectRatio: 0.45, 
+                    childAspectRatio: 0.45,
                   ),
                   itemCount: movies.length,
                   itemBuilder: (context, index) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        AspectRatio(aspectRatio: 2 / 3,
+                        AspectRatio(
+                          aspectRatio: 2 / 3,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: Image.network(
@@ -155,13 +156,13 @@ class _ImdbUiState extends State<ImdbUi> {
                                   color: Colors.white,
                                   fontSize: 14.sp,
                                 ),
-                                maxLines:2,
+                                maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 4.h,),
+                        SizedBox(height: 4.h),
                         Text(
                           movies[index]['type'],
                           style: TextStyle(
@@ -169,7 +170,7 @@ class _ImdbUiState extends State<ImdbUi> {
                             fontSize: 14.sp,
                           ),
                         ),
-                        SizedBox(height: 2.h,),
+                        SizedBox(height: 2.h),
                         Text(
                           movies[index]['description'],
                           style: TextStyle(

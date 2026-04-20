@@ -1,4 +1,4 @@
-import 'package:api_ui/imdb_ui.dart';
+import 'package:api_ui/UI/imdb_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
