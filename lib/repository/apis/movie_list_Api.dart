@@ -11,7 +11,7 @@ class MovieListApi {
 
   Future<List<MovieListModel>> getmovies() async {
     String trendingPath =
-        " https://imdb236.p.rapidapi.com/api/imdb/cast/nm0000190/titles";
+        "https://imdb236.p.rapidapi.com/api/imdb/cast/nm0000190/titles";
     Response response = await apiClient.invokeAPI(trendingPath, "GET", null);
     print(response.body);
     if (response.statusCode == 200) {

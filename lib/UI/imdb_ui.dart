@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../bloc/movie list/bloc/movie_list_bloc.dart';
 
 class ImdbUi extends StatefulWidget {
   const ImdbUi({super.key});
@@ -47,145 +50,156 @@ class _ImdbUiState extends State<ImdbUi> {
           'Description:"The 96th Academy Awards, held on March 10th, 2024 from the Dolby Threatre in Hollywood and hosted by comedian Jimmy Kimmel for the fourth time. The cultural phenomenon of "Barbenheimer" in six different categories is a recurring theme."',
     },
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<MovieListBloc>(context).add(FetchMovieListEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        leading: Icon(Icons.menu, color: Colors.white),
+        title: Container(
+          width: 68.w,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16.r),
+            color: Colors.amber,
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 8.w),
+            child: Text(
+              'IMDB',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 21.sp,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Icon(Icons.search, color: Colors.white),
+          ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'Sign in',
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 18.sp,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(left: 20.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 20.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: BlocBuilder<MovieListBloc, MovieListState>(
+            builder: (context, state) {
+              if (state is MovieListBlocLoading) {
+                return Center(child: CircularProgressIndicator());
+              }
+              if (state is MovieListBlocError) {
+                return Center(
+                  child: Text('Error', style: TextStyle(color: Colors.white)),
+                );
+              }
+              if (state is MovieListBlocLoaded) {
+                final movie =
+                    BlocProvider.of<MovieListBloc>(context).movieListModel;
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Icon(Icons.menu, color: Colors.white),
-                        Padding(
-                          padding: EdgeInsets.only(left: 30.w),
-                          child: Container(
-                            width: 60.w,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16.r),
-                              color: Colors.amber,
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 8.h),
-                              child: Center(
-                                child: Text(
-                                  'IMDB',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 16.sp,
-                                    color: Colors.black,
+                    SizedBox(height: 30.h),
+                    Expanded(
+                      child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 20,
+                          mainAxisSpacing: 20,
+                          childAspectRatio: 0.45,
+                        ),
+                        itemCount: movie.length,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AspectRatio(
+                                aspectRatio: 2 / 3,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Image.network(
+                                    movie[index].thumbnails!.first.url!,
+                                    fit: BoxFit.cover,
+                                    width: double.infinity,
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(right: 40.w),
-                      child: Row(
-                        children: [
-                          Icon(Icons.search, color: Colors.white),
-                          Padding(
-                            padding: EdgeInsets.only(left: 15.w),
-                            child: Text(
-                              'Sign in',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16.sp,
-                                color: Colors.white,
+                              // SizedBox(height: 8),
+                              Padding(
+                                padding: EdgeInsets.only(top: 8.h),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      movie[index].type ?? 'Type',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    SizedBox(height: 2.h),
+                                    Text(
+                                      movie[index].originalTitle ?? 'unkwon',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14.sp,
+                                      ),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 30.h),
-              Expanded(
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20,
-                    childAspectRatio: 0.45,
-                  ),
-                  itemCount: movies.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AspectRatio(
-                          aspectRatio: 2 / 3,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: Image.network(
-                              movies[index]['image'],
-                              fit: BoxFit.cover,
-                              width: double.infinity,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              movies[index]['category'],
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Expanded(
-                              child: Text(
-                                movies[index]['name'],
+                              SizedBox(height: 4.h),
+                              Text(
+                                '⭐${movie[index].averageRating}',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 14.sp,
                                 ),
+                              ),
+                              SizedBox(height: 2.h),
+                              Text(
+                                movie[index].description ?? 'No description',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12.sp,
+                                ),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 4.h),
-                        Text(
-                          movies[index]['type'],
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14.sp,
-                          ),
-                        ),
-                        SizedBox(height: 2.h),
-                        Text(
-                          movies[index]['description'],
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12.sp,
-                          ),
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
-            ],
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              } else {
+                return SizedBox();
+              }
+            },
           ),
         ),
       ),

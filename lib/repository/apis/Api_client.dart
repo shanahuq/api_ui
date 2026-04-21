@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'api_exception.dart';
 
+
 class ApiClient {
   Future<Response> invokeAPI(String path, String method, Object? body) async {
     Map<String, String> headerParams = {};
@@ -65,7 +66,7 @@ class ApiClient {
             // "Authorization": 'Bearer $accessToken',
             'content-Type': 'application/json',
             'x-rapidapi-host': 'imdb236.p.rapidapi.com',
-            'x-rapidapi-key': ' 5b1337101cmshc566574615eee67p1c0c8cjsnc9ff4636f1ea'
+            'x-rapidapi-key': '5b1337101cmshc566574615eee67p1c0c8cjsnc9ff4636f1ea'
           },
           
         );

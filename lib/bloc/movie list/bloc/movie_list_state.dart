@@ -4,6 +4,6 @@ part of 'movie_list_bloc.dart';
 sealed class MovieListState {}
 
 final class MovieListInitial extends MovieListState {}
-class MovieListBlocLoadeding extends MovieListState{}
+class MovieListBlocLoading extends MovieListState{}
 class MovieListBlocLoaded extends MovieListState{}
 class MovieListBlocError extends MovieListState{}
