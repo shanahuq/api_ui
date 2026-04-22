@@ -1,3 +1,4 @@
+import 'package:api_ui/UI/detailed_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -130,66 +131,82 @@ class _ImdbUiState extends State<ImdbUi> {
                         ),
                         itemCount: movie.length,
                         itemBuilder: (context, index) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              AspectRatio(
-                                aspectRatio: 2 / 3,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(12),
-                                  child: Image.network(
-                                    movie[index].thumbnails!.first.url!,
-                                    fit: BoxFit.cover,
-                                    width: double.infinity,
+                          final selectedMovie =movie[index];
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (_) => DetailedPage(movie: selectedMovie)),
+                              );
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                AspectRatio(
+                                  aspectRatio: 2 / 3,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: Image.network(
+                                      movie[index].thumbnails?.isNotEmpty == true
+                                          ? movie[index].thumbnails!.first.url ??
+                                              ''
+                                          : 'https://via.placeholder.com/300x450',
+                                      fit: BoxFit.cover,
+                                      width: double.infinity,
+                                      errorBuilder:
+                                          (context, error, stackTrace) =>
+                                              const Icon(
+                                                Icons.broken_image,
+                                                color: Colors.grey,
+                                              ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              // SizedBox(height: 8),
-                              Padding(
-                                padding: EdgeInsets.only(top: 8.h),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      movie[index].type ?? 'Type',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w500,
+                                // SizedBox(height: 8),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 8.h),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        movie[index].type ?? 'Type',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(height: 2.h),
-                                    Text(
-                                      movie[index].originalTitle ?? 'unkwon',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 14.sp,
+                                      SizedBox(height: 2.h),
+                                      Text(
+                                        movie[index].originalTitle ?? 'Unknown Title',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14.sp,
+                                        ),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 4.h),
-                              Text(
-                                '⭐${movie[index].averageRating}',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14.sp,
+                                SizedBox(height: 4.h),
+                                Text(
+                                  '⭐${movie[index].averageRating ?? 0}',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14.sp,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 2.h),
-                              Text(
-                                movie[index].description ?? 'No description',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12.sp,
+                                SizedBox(height: 2.h),
+                                Text(
+                                  movie[index].description ?? 'No description',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12.sp,
+                                  ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
+                              ],
+                            ),
                           );
                         },
                       ),

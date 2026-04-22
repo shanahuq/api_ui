@@ -1,17 +1,135 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DetailedPage extends StatelessWidget {
   final dynamic movie;
-  const DetailedPage({super.key,required this.movie});
-
+  const DetailedPage({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: ,
+        leading: GestureDetector(
+          onTap: () => Navigator.pop(context),
+          child: Icon(Icons.arrow_back, color: Colors.white),
+        ),
+        title: Container(
+          width: 68.w,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16.r),
+            color: Colors.amber,
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 8.w),
+            child: Text(
+              'IMDB',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 21.sp,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(Icons.search, color: Colors.white),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Sign in',
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 18.sp,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 30.h),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8.r),
+                child: Image.network(
+                  movie.thumbnails?.isNotEmpty == true
+                      ? movie.thumbnails!.first.url ?? ''
+                      : 'https://via.placeholder.com/300x450',
+                  height: 300.h,
+                  // width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              SizedBox(height: 20.h),
+              Text(
+                movie.originalTitle ?? 'Unknown Title',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16.sp,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(height: 5.h),
+              SizedBox(
+                width: 400.w,
+                child: Divider(color: const Color.fromARGB(104, 158, 158, 158),)),
+              Text(
+                'Type : ${movie.type ?? 'N/A'}',
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14.sp,
+                  color: Colors. amber,
+                ),
+              ),
+              SizedBox(height: 5.h),
+              SizedBox(
+                width: 400.w,
+                child: Divider(color: const Color.fromARGB(104, 158, 158, 158),)),
+              Row(mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.star, color: Colors.amber),
+                  SizedBox(width: 10.w),
+                  Text(
+                    '${movie.averageRating ?? 0}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14.sp,
+                      color: const Color.fromARGB(159, 255, 255, 255),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 5.h),
+              SizedBox(
+                width: 400.w,
+                child: Divider(color: const Color.fromARGB(104, 158, 158, 158),)),
+              Text(
+                'Description',
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18.sp,
+                  color: Colors.amber,
+                ),
+              ),
+              SizedBox(height: 10.h),
+              Text(
+                movie.description ?? 'No Description',
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16.sp,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
