@@ -1,5 +1,6 @@
 
                                                                                                                     
+import 'package:api_ui/repository/models/movie_details.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -15,6 +16,8 @@ part 'movie_list_state.dart';
 class MovieListBloc extends Bloc<MovieListEvent, MovieListState> {
   MovieListApi movieListApi = MovieListApi();
   late List<MovieListModel> movieListModel;
+   
+
   MovieListBloc() : super(MovieListInitial()) {
     on<MovieListEvent>((event, emit) async {
       emit(MovieListBlocLoading());
