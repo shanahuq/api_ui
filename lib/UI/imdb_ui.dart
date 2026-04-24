@@ -134,7 +134,7 @@ class _ImdbUiState extends State<ImdbUi> {
                           final selectedMovie =movie[index];
                           return GestureDetector(
                             onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (_) => DetailedPage(movie: selectedMovie)),
+                              Navigator.push(context, MaterialPageRoute(builder: (_) => DetailedPage(id: selectedMovie.id.toString())),
                               );
                             },
                             child: Column(

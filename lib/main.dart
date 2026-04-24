@@ -1,4 +1,5 @@
 import 'package:api_ui/UI/imdb_ui.dart';
+import 'package:api_ui/bloc/movie_details/bloc/movie_details_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,8 +19,11 @@ class MyApp extends StatelessWidget {
       designSize: Size(414, 896),
       minTextAdapt: true,
       splitScreenMode: true,
-      child: BlocProvider(
-        create: (_) => MovieListBloc(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (_) => MovieListBloc()),
+          BlocProvider(create: (context) => MovieDetailsBloc()),
+        ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',

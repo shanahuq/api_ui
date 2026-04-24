@@ -5,8 +5,8 @@ import 'package:http/http.dart';
 import 'dart:convert';
 class MovieDetailsApi {
 ApiClient apiClient = ApiClient();
-Future <List<MovieDetailsModel>> getmovieDetails() async {
-  String trendingPath = "https://imdb236.p.rapidapi.com/api/imdb/tt0816692";
+Future <List<MovieDetailsModel>> getmovieDetails(String id ) async {
+  String trendingPath = "https://imdb236.p.rapidapi.com/api/imdb/$id";
   Response response = await apiClient.invokeAPI(trendingPath, "GET", null);
   print(response.body);
   if (response.statusCode == 200) {

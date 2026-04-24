@@ -10,11 +10,11 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   MovieDetailsApi movieDetailsApi = MovieDetailsApi();
   late List<MovieDetailsModel>movieDetailsModel;
   MovieDetailsBloc() : super(MovieDetailsInitial()) {
-    on<MovieDetailsEvent>((event, emit) async {
+    on<FetchMovieDetailsEvent>((event, emit) async {
       emit (MovieDetailsBlocloading());
       try {
      
-        movieDetailsModel = await movieDetailsApi.getmovieDetails();
+        movieDetailsModel = await movieDetailsApi.getmovieDetails(event.id);
         print('************************************');
         emit(MovieDetailsBlocLoaded());
         print('***********Loaded***********');
