@@ -131,10 +131,17 @@ class _ImdbUiState extends State<ImdbUi> {
                         ),
                         itemCount: movie.length,
                         itemBuilder: (context, index) {
-                          final selectedMovie =movie[index];
+                          final selectedMovie = movie[index];
                           return GestureDetector(
                             onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (_) => DetailedPage(id: selectedMovie.id.toString())),
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:
+                                      (_) => DetailedPage(
+                                        id: selectedMovie.id.toString(),
+                                      ),
+                                ),
                               );
                             },
                             child: Column(
@@ -145,8 +152,12 @@ class _ImdbUiState extends State<ImdbUi> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(12),
                                     child: Image.network(
-                                      movie[index].thumbnails?.isNotEmpty == true
-                                          ? movie[index].thumbnails!.first.url ??
+                                      movie[index].thumbnails?.isNotEmpty ==
+                                              true
+                                          ? movie[index]
+                                                  .thumbnails!
+                                                  .first
+                                                  .url ??
                                               ''
                                           : 'https://via.placeholder.com/300x450',
                                       fit: BoxFit.cover,
@@ -164,10 +175,13 @@ class _ImdbUiState extends State<ImdbUi> {
                                 Padding(
                                   padding: EdgeInsets.only(top: 8.h),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        movie[index].type ?? 'Type',
+                                        (movie[index].genre?.isNotEmpty == true)
+                                            ? movie[index].genre!.first
+                                            : 'Item',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14.sp,
@@ -176,7 +190,7 @@ class _ImdbUiState extends State<ImdbUi> {
                                       ),
                                       SizedBox(height: 2.h),
                                       Text(
-                                        movie[index].originalTitle ?? 'Unknown Title',
+                                        movie[index].title ?? 'Unknown Title',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14.sp,
@@ -189,7 +203,7 @@ class _ImdbUiState extends State<ImdbUi> {
                                 ),
                                 SizedBox(height: 4.h),
                                 Text(
-                                  '⭐${movie[index].averageRating ?? 0}',
+                                  '⭐${movie[index].rank ?? 0}',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 14.sp,

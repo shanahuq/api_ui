@@ -9,15 +9,15 @@ import 'Api_exception.dart';
 class MovieListApi {
   ApiClient apiClient = ApiClient();
 
-  Future<List<MovieListModel>> getmovies() async {
+  Future<List<MovieListModels>> getmovies() async {
     String trendingPath =
         "https://imdb236.p.rapidapi.com/api/imdb/cast/nm0000190/titles";
     Response response = await apiClient.invokeAPI(trendingPath, "GET", null);
     print(response.body);
     if (response.statusCode == 200) {
       List<dynamic> jsonList = json.decode(response.body);
-      List<MovieListModel> movieList =
-          jsonList.map((json) => MovieListModel.fromJson(json)).toList();
+      List<MovieListModels> movieList =
+          jsonList.map((json) => MovieListModels.fromJson(json)).toList();
       return movieList;
     } else {
       final errorBody = jsonDecode(response.body);
