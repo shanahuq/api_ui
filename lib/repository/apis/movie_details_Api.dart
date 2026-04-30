@@ -5,14 +5,14 @@ import 'package:http/http.dart';
 import 'dart:convert';
 class MovieDetailsApi {
 ApiClient apiClient = ApiClient();
-Future <List<MovieDetailsModel>> getmovieDetails(String id ) async {
+Future <List<Moviedetails>> getmovieDetails(String id ) async {
   String trendingPath = "https://imdb236.p.rapidapi.com/api/imdb/$id";
   Response response = await apiClient.invokeAPI(trendingPath, "GET", null);
   print(response.body);
   if (response.statusCode == 200) {
     Map<String,dynamic> jsonMap = json.decode(response.body);
-    MovieDetailsModel movie = MovieDetailsModel.fromJson(jsonMap);
-  return [MovieDetailsModel.fromJson(jsonMap)];
+    Moviedetails movie = Moviedetails.fromJson(jsonMap);
+  return [Moviedetails.fromJson(jsonMap)];
   }else{
     final errorBody = json.decode(response.body);
     throw ApiException(

@@ -95,6 +95,7 @@ class _DetailedPageState extends State<DetailedPage> {
                     SizedBox(height: 30.h),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8.r),
+
                       child: Image.network(
                         imageUrl ?? 'https://via.placeholder.com/300x450',
                         height: 300.h,
@@ -118,7 +119,10 @@ class _DetailedPageState extends State<DetailedPage> {
                             );
                           }
                         },
-                        child: Text("Watch Trailer"),
+                        child: Text(
+                          "Watch Trailer",
+                          style: TextStyle(color: Colors.red),
+                        ),
                       ),
                     SizedBox(height: 20.h),
                     Text(

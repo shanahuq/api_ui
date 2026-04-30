@@ -15,7 +15,7 @@ part 'movie_list_state.dart';
 
 class MovieListBloc extends Bloc<MovieListEvent, MovieListState> {
   MovieListApi movieListApi = MovieListApi();
-  late List<MovieListModels> movieListModel;
+  late List<Movielist> movieListModel;
    
 
   MovieListBloc() : super(MovieListInitial()) {

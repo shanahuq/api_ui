@@ -66,7 +66,7 @@ class ApiClient {
             // "Authorization": 'Bearer $accessToken',
             'content-Type': 'application/json',
             'x-rapidapi-host': 'imdb236.p.rapidapi.com',
-            'x-rapidapi-key': '5b1337101cmshc566574615eee67p1c0c8cjsnc9ff4636f1ea'
+            'x-rapidapi-key': 'f6d974cf72msh2a38ce245a6e1dep1c3733jsn271f6f36b8b5'
           },
           
         );

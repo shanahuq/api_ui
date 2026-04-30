@@ -8,7 +8,7 @@ part 'movie_details_state.dart';
 
 class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   MovieDetailsApi movieDetailsApi = MovieDetailsApi();
-  late List<MovieDetailsModel> movieDetailsModel;
+  late List<Moviedetails> movieDetailsModel;
   MovieDetailsBloc() : super(MovieDetailsInitial()) {
     on<FetchMovieDetailsEvent>((event, emit) async {
       emit(MovieDetailsBlocloading());

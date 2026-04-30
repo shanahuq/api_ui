@@ -179,8 +179,8 @@ class _ImdbUiState extends State<ImdbUi> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        (movie[index].genre?.isNotEmpty == true)
-                                            ? movie[index].genre!.first
+                                        (movie[index].type?.isNotEmpty == true)
+                                            ? movie[index].type!
                                             : 'Item',
                                         style: TextStyle(
                                           color: Colors.white,
@@ -190,7 +190,7 @@ class _ImdbUiState extends State<ImdbUi> {
                                       ),
                                       SizedBox(height: 2.h),
                                       Text(
-                                        movie[index].title ?? 'Unknown Title',
+                                        movie[index].originalTitle ?? 'Unknown Title',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14.sp,
@@ -203,7 +203,7 @@ class _ImdbUiState extends State<ImdbUi> {
                                 ),
                                 SizedBox(height: 4.h),
                                 Text(
-                                  '⭐${movie[index].rank ?? 0}',
+                                  '⭐${movie[index].averageRating ?? 0}',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 14.sp,

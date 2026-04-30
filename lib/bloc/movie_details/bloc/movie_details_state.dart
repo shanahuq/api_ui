@@ -8,7 +8,7 @@ final class MovieDetailsInitial extends MovieDetailsState {}
 class MovieDetailsBlocloading extends MovieDetailsState {}
 
 class MovieDetailsBlocLoaded extends MovieDetailsState {
-   final MovieDetailsModel movie;
+   final Moviedetails movie;
 
   MovieDetailsBlocLoaded({required this.movie});
 }

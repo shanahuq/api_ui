@@ -1,5 +1,5 @@
 
-class MovieDetailsModel {
+class Moviedetails {
     String? id;
     String? url;
     String? primaryTitle;
@@ -31,9 +31,9 @@ class MovieDetailsModel {
     List<Writers>? writers;
     List<Cast>? cast;
 
-    MovieDetailsModel({this.id, this.url, this.primaryTitle, this.originalTitle, this.type, this.description, this.primaryImage, this.thumbnails, this.trailer, this.contentRating, this.startYear, this.endYear, this.releaseDate, this.interests, this.countriesOfOrigin, this.externalLinks, this.spokenLanguages, this.filmingLocations, this.productionCompanies, this.budget, this.grossWorldwide, this.genres, this.isAdult, this.runtimeMinutes, this.averageRating, this.numVotes, this.metascore, this.directors, this.writers, this.cast});
+    Moviedetails({this.id, this.url, this.primaryTitle, this.originalTitle, this.type, this.description, this.primaryImage, this.thumbnails, this.trailer, this.contentRating, this.startYear, this.endYear, this.releaseDate, this.interests, this.countriesOfOrigin, this.externalLinks, this.spokenLanguages, this.filmingLocations, this.productionCompanies, this.budget, this.grossWorldwide, this.genres, this.isAdult, this.runtimeMinutes, this.averageRating, this.numVotes, this.metascore, this.directors, this.writers, this.cast});
 
-    MovieDetailsModel.fromJson(Map<String, dynamic> json) {
+    Moviedetails.fromJson(Map<String, dynamic> json) {
         id = json["id"];
         url = json["url"];
         primaryTitle = json["primaryTitle"];
